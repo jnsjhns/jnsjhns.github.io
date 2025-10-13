@@ -15,14 +15,24 @@
       font-family: sans-serif;
       color: white;
       overflow: hidden;
-      background: linear-gradient(-45deg, #6a7ba2, #8da3c2, #9cb3ce, #6a7ba2);
-      background-size: 400% 400%;
-      animation: waveBG 40s ease-in-out infinite;
+
+      /* Etwas kontrastreicherer Farbverlauf */
+      background: linear-gradient(-45deg,
+        #5d6f91,
+        #7b8ead,
+        #9db2ca,
+        #6b7d9b
+      );
+
+      background-size: 800% 800%;
+      animation: waveBG 60s ease-in-out infinite;
     }
 
     @keyframes waveBG {
       0% { background-position: 0% 50%; }
+      25% { background-position: 50% 60%; }
       50% { background-position: 100% 50%; }
+      75% { background-position: 50% 40%; }
       100% { background-position: 0% 50%; }
     }
 
