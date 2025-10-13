@@ -5,58 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>t_tle</title>
   <style>
-    /* ========== LAYOUT-GRID ========== */
+    /* ========== GRUNDLAYOUT ========== */
     body {
       margin: 0;
       height: 100vh;
       display: grid;
-      grid-template-columns: 200px 1fr; /* linke Spalte Buttons, rechte Spalte Main */
-      grid-template-rows: 60px 1fr;     /* schmaler Header oben */
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: 60px 1fr;
       grid-template-areas:
         "h h"
         "b m";
-      background: linear-gradient(-45deg, #5d6f91, #7b8ead, #9db2ca, #6b7d9b);
-      background-size: 800% 800%;
-      animation: waveBG 60s ease-in-out infinite;
+      background-color: #a7b7c9; /* helles taubenblau */
       font-family: sans-serif;
       color: white;
       overflow: hidden;
     }
 
-    @keyframes waveBG {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 50% 60%; }
-      50% { background-position: 100% 50%; }
-      75% { background-position: 50% 40%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ========== HEADER ========== */
     header {
       grid-area: h;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(6px);
     }
 
-    /* ========== BUTTON-BEREICH ========== */
     nav {
       grid-area: b;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: flex-start;
-      background-color: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(6px);
       padding: 1rem;
       gap: 0.5rem;
     }
 
     button {
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.25);
       border: none;
       color: white;
       padding: 0.6rem;
@@ -67,23 +51,63 @@
     }
 
     button:hover {
-      background-color: rgba(255, 255, 255, 0.35);
+      background-color: rgba(255, 255, 255, 0.4);
     }
 
-    /* ========== MAIN-BEREICH ========== */
     main {
       grid-area: m;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      position: relative;
+    }
+
+    #screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #screen img {
+      position: absolute;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      transition: opacity 0.5s ease;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #screen img.visible {
+      opacity: 1;
+    }
+
+    /* ========== RESPONSIVE ANPASSUNG ========== */
+    @media (max-width: 800px) {
+      body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px 1fr auto;
+        grid-template-areas:
+          "h"
+          "m"
+          "b";
+      }
+
+      nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      button {
+        flex: 1 1 auto;
+        min-width: 100px;
+      }
     }
   </style>
 </head>
@@ -107,31 +131,37 @@
   </main>
 
   <script>
-    // Zähler für jeden Ordner
     const counters = {};
 
     function showNextImage(folder) {
       const screen = document.getElementById('screen');
-
-      // Zähler initialisieren
       if (!counters[folder]) counters[folder] = 1;
 
-      // Bildpfad (deine Ordnerstruktur auf GitHub Pages)
       const imagePath = `${folder}/${counters[folder]}.jpg`;
-
-      // Neues Bild erstellen
       const img = new Image();
       img.src = imagePath;
       img.alt = `${folder} ${counters[folder]}`;
+      img.classList.add('fade-in');
 
-      // Wenn das Bild erfolgreich geladen ist:
       img.onload = () => {
-        screen.innerHTML = '';
+        // altes Bild behalten, neues drüberblenden
+        const oldImg = screen.querySelector('img.visible');
+        if (oldImg) oldImg.classList.remove('visible');
         screen.appendChild(img);
-        counters[folder]++; // Zähler erhöhen
+
+        // sanfter Fade-In
+        requestAnimationFrame(() => {
+          img.classList.add('visible');
+        });
+
+        // altes Bild nach Übergang entfernen
+        setTimeout(() => {
+          if (oldImg) oldImg.remove();
+        }, 1000);
+
+        counters[folder]++;
       };
 
-      // Wenn kein weiteres Bild existiert → wieder bei 1 anfangen
       img.onerror = () => {
         counters[folder] = 1;
         showNextImage(folder);
