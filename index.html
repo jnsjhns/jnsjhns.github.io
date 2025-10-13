@@ -5,27 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>t_tle</title>
   <style>
+    /* ========== LAYOUT-GRID ========== */
     body {
       margin: 0;
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 200px 1fr; /* linke Spalte Buttons, rechte Spalte Main */
+      grid-template-rows: 60px 1fr;     /* schmaler Header oben */
+      grid-template-areas:
+        "h h"
+        "b m";
+      background: linear-gradient(-45deg, #5d6f91, #7b8ead, #9db2ca, #6b7d9b);
+      background-size: 800% 800%;
+      animation: waveBG 60s ease-in-out infinite;
       font-family: sans-serif;
       color: white;
       overflow: hidden;
-
-      /* Etwas kontrastreicherer Farbverlauf */
-      background: linear-gradient(-45deg,
-        #5d6f91,
-        #7b8ead,
-        #9db2ca,
-        #6b7d9b
-      );
-
-      background-size: 800% 800%;
-      animation: waveBG 60s ease-in-out infinite;
     }
 
     @keyframes waveBG {
@@ -36,19 +31,112 @@
       100% { background-position: 0% 50%; }
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
+    /* ========== HEADER ========== */
+    header {
+      grid-area: h;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
     }
 
-    p {
-      font-size: 1.2rem;
-      opacity: 0.9;
+    /* ========== BUTTON-BEREICH ========== */
+    nav {
+      grid-area: b;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      background-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      padding: 1rem;
+      gap: 0.5rem;
+    }
+
+    button {
+      background-color: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      padding: 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.35);
+    }
+
+    /* ========== MAIN-BEREICH ========== */
+    main {
+      grid-area: m;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.5s ease;
     }
   </style>
 </head>
 <body>
-  <h1>hey!</h1>
-  <p>Website, gehostet auf GitHub Pages.</p>
+  <header>
+    <span>t_tle – GitHub Page</span>
+  </header>
+
+  <nav>
+    <button onclick="showNextImage('collage')">/collage</button>
+    <button onclick="showNextImage('photography')">/photography</button>
+    <button onclick="showNextImage('about')">/about</button>
+    <button onclick="showNextImage('textiles')">/textiles</button>
+    <button onclick="showNextImage('etc')">/etc</button>
+  </nav>
+
+  <main>
+    <div id="screen">
+      <p>Wähle ein Thema 👈</p>
+    </div>
+  </main>
+
+  <script>
+    // Zähler für jeden Ordner
+    const counters = {};
+
+    function showNextImage(folder) {
+      const screen = document.getElementById('screen');
+
+      // Zähler initialisieren
+      if (!counters[folder]) counters[folder] = 1;
+
+      // Bildpfad (deine Ordnerstruktur auf GitHub Pages)
+      const imagePath = `${folder}/${counters[folder]}.jpg`;
+
+      // Neues Bild erstellen
+      const img = new Image();
+      img.src = imagePath;
+      img.alt = `${folder} ${counters[folder]}`;
+
+      // Wenn das Bild erfolgreich geladen ist:
+      img.onload = () => {
+        screen.innerHTML = '';
+        screen.appendChild(img);
+        counters[folder]++; // Zähler erhöhen
+      };
+
+      // Wenn kein weiteres Bild existiert → wieder bei 1 anfangen
+      img.onerror = () => {
+        counters[folder] = 1;
+        showNextImage(folder);
+      };
+    }
+  </script>
 </body>
 </html>
