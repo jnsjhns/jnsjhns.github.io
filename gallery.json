@@ -1,0 +1,25 @@
+{
+  "about": [
+    { "img": "about/1.jpg", "text": "About Text zum ersten Bild." },
+    { "img": "about/2.jpg", "text": "About Text zum zweiten Bild." },
+    { "img": "about/3.jpg", "text": "About Text zum dritten Bild." }
+  ],
+  "collage": [
+    { "img": "collage/1.jpg", "text": "Collage Erster Dummy-Text." },
+    { "img": "collage/2.jpg", "text": "Collage Zweiter Dummy-Text." },
+    { "img": "collage/3.jpg", "text": "Collage Dritter Dummy-Text." }
+  ],
+  "etc": [
+    { "img": "etc/1.jpg", "text": "Etc Zum ersten Bild." },
+    { "img": "etc/2.jpg", "text": "Etc Zum zweiten Bild." }
+  ],
+  "photography": [
+    { "img": "photography/1.jpg", "text": "Photography Erster Dummy-Text." },
+    { "img": "photography/2.jpg", "text": "Photography Zweiter Dummy-Text." }
+  ],
+  "textiles": [
+    { "img": "textiles/1.jpg", "text": "Textiles Dummy-Text zum ersten Bild." },
+    { "img": "textiles/2.jpg", "text": "Textiles Dummy-Text zum zweiten Bild." },
+    { "img": "textiles/3.jpg", "text": "Textiles Dummy-Text zum dritten Bild." }
+  ]
+}
