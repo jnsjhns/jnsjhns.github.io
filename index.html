@@ -1,224 +1,233 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retro Desktop Gallery</title>
-  <style>
-    body {
-      margin: 0;
-      background: #a7b7c9;
-      font-family: 'Courier New', monospace;
-      color: black;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .grid {
-      display: grid;
-      grid-template-areas:
-        "menu menu"
-        "box1 box2";
-      grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
-      grid-template-rows: auto 1fr;
-      gap: 24px 32px;
-      width: 98vw;
-      max-width: 1200px;
-      margin: 48px auto;
-      justify-items: center;
-    }
-    .menu {
-      grid-area: menu;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(2, 60px);
-      gap: 10px;
-      justify-items: center;
-      align-items: center;
-      margin-bottom: 6px;
-      width: 100%;
-      background: none;
-    }
-    .iconbutton {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      border: none;
-      background: none;
-      outline: none;
-      padding: 0;
-      font-family: inherit;
-      user-select: none;
-      font-size: 1em;
-    }
-    .iconbutton img {
-      width: 44px;
-      height: 44px;
-      pointer-events: none;
-      user-select: none;
-      margin-bottom: 3px;
-    }
-    .iconbutton span {
-      font-size: 0.97em;
-      color: #232323;
-      user-select: none;
-    }
-    .window {
-      background-color: #e0e0e0;
-      border: 2px solid #000;
-      box-shadow: 4px 4px 0 #555;
-      width: 100%;
-      max-width: 540px;
-      min-width: 240px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    .window-header {
-      background-color: #c0c0c0;
-      padding: 9px 18px;
-      font-weight: bold;
-      border-bottom: 2px solid #000;
-      font-size: 1.08em;
-    }
-    #screen, #text-content {
-      min-height: 140px;
-      padding: 19px 16px 28px 16px;
-      font-size: 1.07em;
-      background: inherit;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      user-select: none;
-      overflow: hidden;
-    }
-    #screen img {
-      max-width: 100%;
-      max-height: 270px;
-      object-fit: contain;
-      opacity: 0;
-      transition: opacity 0.8s;
-      pointer-events: none;
-      user-select: none;
-    }
-    #screen img.visible {
-      opacity: 1;
-    }
-    .box1 { grid-area: box1; }
-    .box2 { grid-area: box2; }
-    @media (max-width: 900px) {
-      .grid {
-        grid-template-areas:
-          "menu"
-          "box1"
-          "box2";
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr 1fr;
-        gap: 22px;
-        width: 100vw;
-        margin: 18px auto;
-      }
-      .menu {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 43px);
-        gap: 7px;
-        margin-bottom: 0;
-        width: 99vw;
-      }
-      .window {
-        max-width: 95vw;
-        min-width: 0;
-      }
-      #screen img, #screen, #text-content {
-        max-width: 95vw;
-      }
-    }
-    @media (max-width: 560px) {
-      .window-header {
-        font-size: 1em;
-        padding: 6px 8px;
-      }
-      .window {
-        font-size: .98em;
-        max-width: 100vw;
-      }
-      #screen, #text-content {
-        padding: 7px;
-        font-size: .96em;
-      }
-      .iconbutton img {
-        width: 32px;
-        height: 32px;
-      }
-    }
-    /* Kopieren verhindern */
-    #screen, #text-content {
-      user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      -moz-user-select: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro Desktop Gallery</title>
+<style>
+body {
+  background: #a7b7c9;
+  font-family: 'Courier New', monospace;
+  color: black;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.main-grid {
+  display: grid;
+  grid-template-areas:
+    "menu"
+    "box1"
+    "box2"
+    "menu2";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr 1fr auto;
+  gap: 22px;
+  width: 96vw;
+  max-width: 650px;
+  margin: 36px 0;
+  justify-items: center;
+}
+.menu, .menu2 {
+  grid-area: menu;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 52px);
+  gap: 10px 22px;
+  justify-items: center;
+  width: 100%;
+}
+.menu2 { grid-area: menu2; display: none; } /* Für mobile */
+.window {
+  background: #e0e0e0;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 #555;
+  width: 100%;
+  max-width: 540px;
+  min-width: 220px;
+  margin: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  padding: 18px 12px 18px 12px;
+  box-sizing: border-box;
+}
+.window-header {
+  background: #c0c0c0;
+  padding: 9px 18px;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  font-size: 1.08em;
+  border-radius: 8px 8px 0 0;
+}
+#screen {
+  min-height: 140px;
+  padding: 19px 10px 20px 10px;
+  font-size: 1.04em;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 0 0 8px 8px;
+  margin: 0;
+  user-select: none;
+}
+#screen img {
+  max-width: 100%;
+  max-height: 270px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 4px;
+}
+#text-content {
+  min-height: 100px;
+  padding: 11px 7px 14px 7px;
+  font-size: 1.07em;
+  background: inherit;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  user-select: none;
+  overflow-y: auto;
+  border-radius: 0 0 8px 8px;
+  gap: 5px;
+}
+.iconbutton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  user-select: none;
+}
+.iconbutton img {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 1px;
+  pointer-events: none;
+  user-select: none;
+}
+.iconbutton span {
+  font-size: 0.98em;
+}
+.box1 { grid-area: box1;}
+.box2 { grid-area: box2;}
+@media (max-width: 700px) {
+  .main-grid {
+    grid-template-areas:
+      "box1"
+      "box2"
+      "menu2";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    gap: 20px;
+    width: 99vw;
+    margin: 12px 0 0 0;
+  }
+  .menu {
+    display: none;
+  }
+  .menu2 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 46px);
+    gap: 7px 11px;
+    width: 100%;
+    margin-top: 12px;
+    justify-items: center;
+    align-items: center;
+  }
+  .window {
+    max-width: 98vw;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+@media (max-width: 430px) {
+  .window {
+    font-size: .97em;
+    padding: 7px;
+    border-radius: 8px;
+  }
+  .window-header {
+    padding: 5px 7px;
+  }
+  .iconbutton img {
+    width: 28px;
+    height: 28px;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="grid">
-    <nav class="menu">
-      <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
-      <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photography</span></button>
-      <button class="iconbutton" onclick="showNextImage('about')"><img src="icons/pixel.png" alt=""><span>/about</span></button>
-      <button class="iconbutton" onclick="showNextImage('textiles')"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
-      <button class="iconbutton" onclick="showNextImage('etc')"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
-    </nav>
-    <section class="window box1">
-      <div class="window-header">~/jahns/png.view</div>
-      <div id="screen"></div>
-    </section>
-    <section class="window box2">
-      <div class="window-header">~/jonas/v1.0.txt</div>
-      <div id="text-content"></div>
-    </section>
-  </div>
-  <script>
-    let galleryData = {};
-    const counters = {};
-    fetch('gallery.json')
-      .then(response => response.json())
-      .then(data => {
-        galleryData = data;
-      });
+<div class="main-grid">
+  <nav class="menu">
+    <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
+    <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photography</span></button>
+    <button class="iconbutton" onclick="showNextImage('about')"><img src="icons/pixel.png" alt=""><span>/about</span></button>
+    <button class="iconbutton" onclick="showNextImage('textiles')"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
+    <button class="iconbutton" onclick="showNextImage('etc')"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
+  </nav>
+  <section class="window box1">
+    <div class="window-header">~/jahns/png.view</div>
+    <div id="screen"></div>
+  </section>
+  <section class="window box2">
+    <div class="window-header">~/jonas/v1.0.txt</div>
+    <div id="text-content"></div>
+  </section>
+  <nav class="menu2">
+    <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
+    <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photography</span></button>
+    <button class="iconbutton" onclick="showNextImage('about')"><img src="icons/pixel.png" alt=""><span>/about</span></button>
+    <button class="iconbutton" onclick="showNextImage('textiles')"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
+    <button class="iconbutton" onclick="showNextImage('etc')"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
+  </nav>
+</div>
+<script>
+let galleryData = {};
+const counters = {};
+let textLog = [];
 
-    function showNextImage(folder) {
-      const screen = document.getElementById('screen');
-      const textContent = document.getElementById('text-content');
-      if (!galleryData[folder]) return;
-      if (!counters[folder]) counters[folder] = 0;
-      const files = galleryData[folder];
-      const idx = counters[folder] % files.length;
-      const item = files[idx];
-      const img = new Image();
-      img.src = item.img;
-      img.alt = folder + " " + (idx + 1);
-      img.onload = function() {
-        const oldImg = screen.querySelector('img.visible');
-        if (oldImg) oldImg.classList.remove('visible');
-        screen.appendChild(img);
-        requestAnimationFrame(function() {
-          img.classList.add('visible');
-        });
-        setTimeout(function() {
-          if (oldImg) oldImg.remove();
-        }, 800);
-        textContent.innerText = item.text;
-        counters[folder]++;
-      };
-      img.onerror = function() {
-        counters[folder] = 0;
-        showNextImage(folder);
-      };
-    }
-  </script>
+fetch('gallery.json')
+  .then(response => response.json())
+  .then(data => { galleryData = data; });
+
+function showNextImage(folder) {
+  const screen = document.getElementById('screen');
+  const textContent = document.getElementById('text-content');
+  if (!galleryData[folder]) return;
+  if (!counters[folder]) counters[folder] = 0;
+  const files = galleryData[folder];
+  const idx = counters[folder] % files.length;
+  const item = files[idx];
+
+  // Bild direkt ohne Überblenden wechseln
+  while (screen.firstChild) screen.removeChild(screen.firstChild);
+  const img = new Image();
+  img.src = item.img;
+  img.alt = folder + " " + (idx + 1);
+  screen.appendChild(img);
+
+  // Text-Logik: an den Anfang anhängen, max 5 anzeigen
+  textLog.unshift(item.text);
+  if (textLog.length > 5) textLog = textLog.slice(0, 5);
+  // Zeige die letzten 5 (neueste oben)
+  textContent.innerHTML = textLog.map(t => `<div>${t}</div>`).join('');
+
+  counters[folder]++;
+}
+</script>
 </body>
 </html>
