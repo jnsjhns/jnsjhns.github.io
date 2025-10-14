@@ -5,66 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Retro Desktop Gallery</title>
   <style>
-    html, body {
-      height: 100%;
+    body {
       margin: 0;
-      padding: 0;
-      background-color: #a7b7c9;
+      background: #a7b7c9;
       font-family: 'Courier New', monospace;
       color: black;
-    }
-    body {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .container {
-      display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: flex-start;
-      gap: 24px;
-      width: 90vw;
-      max-width: 1100px;
-      margin: 40px auto 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-areas:
+        "menu menu"
+        "box1 box2";
+      grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+      grid-template-rows: auto 1fr;
+      gap: 24px 32px;
+      width: 98vw;
+      max-width: 1200px;
+      margin: 48px auto;
+      justify-items: center;
+    }
+    .menu {
+      grid-area: menu;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, 60px);
+      gap: 10px;
+      justify-items: center;
+      align-items: center;
+      margin-bottom: 6px;
+      width: 100%;
+      background: none;
+    }
+    .iconbutton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      background: none;
+      outline: none;
+      padding: 0;
+      font-family: inherit;
+      user-select: none;
+      font-size: 1em;
+    }
+    .iconbutton img {
+      width: 44px;
+      height: 44px;
+      pointer-events: none;
+      user-select: none;
+      margin-bottom: 3px;
+    }
+    .iconbutton span {
+      font-size: 0.97em;
+      color: #232323;
+      user-select: none;
     }
     .window {
-      flex: 1 1 350px;
       background-color: #e0e0e0;
       border: 2px solid #000;
       box-shadow: 4px 4px 0 #555;
-      min-width: 280px;
-      max-width: 640px;
       width: 100%;
-      margin-bottom: 0;
-      padding: 0;
+      max-width: 540px;
+      min-width: 240px;
+      margin: 0;
       display: flex;
       flex-direction: column;
     }
     .window-header {
       background-color: #c0c0c0;
-      padding: 8px 10px 8px 16px;
+      padding: 9px 18px;
       font-weight: bold;
       border-bottom: 2px solid #000;
-      letter-spacing: .03em;
-      font-size: 1.18em;
+      font-size: 1.08em;
     }
     #screen, #text-content {
-      padding: 18px 18px 24px 18px;
-      font-size: 1.10em;
-      min-height: 200px;
+      min-height: 140px;
+      padding: 19px 16px 28px 16px;
+      font-size: 1.07em;
+      background: inherit;
       display: flex;
-      flex: 1;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      user-select: none;
       overflow: hidden;
-      background: inherit;
     }
     #screen img {
       max-width: 100%;
-      max-height: 340px;
+      max-height: 270px;
       object-fit: contain;
       opacity: 0;
       transition: opacity 0.8s;
@@ -74,134 +107,83 @@
     #screen img.visible {
       opacity: 1;
     }
-    /* Iconleiste */
-    .icons {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: absolute;
-      left: 0;
-      top: 55px;
-      z-index: 10;
-    }
-    .icon {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 0;
-      user-select: none;
-    }
-    .icon img {
-      width: 46px;
-      height: 46px;
-      display: block;
-      margin-bottom: 3px;
-      pointer-events: none;
-      user-select: none;
-    }
-    .icon span {
-      font-size: 1em;
-      color: #232323;
-      margin-top: 0;
-      font-family: 'Courier New', monospace;
-      user-select: none;
-    }
-    /* Responsive Anpassung */
+    .box1 { grid-area: box1; }
+    .box2 { grid-area: box2; }
     @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-        align-items: center;
-        gap: 28px;
+      .grid {
+        grid-template-areas:
+          "menu"
+          "box1"
+          "box2";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr 1fr;
+        gap: 22px;
+        width: 100vw;
+        margin: 18px auto;
+      }
+      .menu {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 43px);
+        gap: 7px;
+        margin-bottom: 0;
+        width: 99vw;
       }
       .window {
-        max-width: 97vw;
+        max-width: 95vw;
+        min-width: 0;
       }
-      .icons {
-        position: static;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 29px;
-        margin-bottom: 16px;
-        width: 100vw;
-        gap: 14px;
+      #screen img, #screen, #text-content {
+        max-width: 95vw;
       }
     }
-    @media (max-width: 540px) {
+    @media (max-width: 560px) {
+      .window-header {
+        font-size: 1em;
+        padding: 6px 8px;
+      }
       .window {
-        min-width: 0;
+        font-size: .98em;
         max-width: 100vw;
-        font-size: .96em;
       }
       #screen, #text-content {
-        padding: 10px;
-        font-size: .97em;
+        padding: 7px;
+        font-size: .96em;
       }
-      .window-header {
-        font-size: 1.06em;
-        padding: 7px 6px 7px 10px;
-      }
-      .icons {
-        gap: 7px;
-      }
-      .icon img {
-        width: 36px;
-        height: 36px;
+      .iconbutton img {
+        width: 32px;
+        height: 32px;
       }
     }
-    /* Text nicht kopierbar */
-    #text-content, #screen {
+    /* Kopieren verhindern */
+    #screen, #text-content {
       user-select: none;
       -webkit-user-select: none;
-      -moz-user-select: none;
       -ms-user-select: none;
+      -moz-user-select: none;
     }
   </style>
 </head>
 <body>
-  <!-- Iconbar (wird auf Mobil automatisch unter die Fenster geschoben) -->
-  <div class="icons" id="iconbar">
-    <button class="icon" onclick="showNextImage('collage')" tabindex="1">
-      <img src="icons/pixel.png" alt="Collage Icon">
-      <span>/collage</span>
-    </button>
-    <button class="icon" onclick="showNextImage('photography')" tabindex="2">
-      <img src="icons/pixel.png" alt="Photography Icon">
-      <span>/photography</span>
-    </button>
-    <button class="icon" onclick="showNextImage('about')" tabindex="3">
-      <img src="icons/pixel.png" alt="About Icon">
-      <span>/about</span>
-    </button>
-    <button class="icon" onclick="showNextImage('textiles')" tabindex="4">
-      <img src="icons/pixel.png" alt="Textiles Icon">
-      <span>/textiles</span>
-    </button>
-    <button class="icon" onclick="showNextImage('etc')" tabindex="5">
-      <img src="icons/pixel.png" alt="Etc Icon">
-      <span>/etc</span>
-    </button>
-  </div>
-  <!-- Galerie-Container -->
-  <div class="container">
-    <!-- Bildfenster -->
-    <div class="window" id="window">
+  <div class="grid">
+    <nav class="menu">
+      <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
+      <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photography</span></button>
+      <button class="iconbutton" onclick="showNextImage('about')"><img src="icons/pixel.png" alt=""><span>/about</span></button>
+      <button class="iconbutton" onclick="showNextImage('textiles')"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
+      <button class="iconbutton" onclick="showNextImage('etc')"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
+    </nav>
+    <section class="window box1">
       <div class="window-header">~/jahns/png.view</div>
       <div id="screen"></div>
-    </div>
-    <!-- Textfenster -->
-    <div class="window" id="text-box">
+    </section>
+    <section class="window box2">
       <div class="window-header">~/jonas/v1.0.txt</div>
       <div id="text-content"></div>
-    </div>
+    </section>
   </div>
   <script>
     let galleryData = {};
     const counters = {};
-
     fetch('gallery.json')
       .then(response => response.json())
       .then(data => {
@@ -216,8 +198,6 @@
       const files = galleryData[folder];
       const idx = counters[folder] % files.length;
       const item = files[idx];
-
-      // Bild anzeigen
       const img = new Image();
       img.src = item.img;
       img.alt = folder + " " + (idx + 1);
