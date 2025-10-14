@@ -8,98 +8,107 @@
 body {
   background: #a7b7c9;
   font-family: 'Courier New', monospace;
-  color: black;
   margin: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
 }
-.main-grid {
+.grid {
   display: grid;
   grid-template-areas:
-    "menu"
-    "box1"
-    "box2"
-    "menu2";
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr 1fr auto;
-  gap: 22px;
-  width: 96vw;
-  max-width: 650px;
-  margin: 36px 0;
+    "menu box1"
+    "menu box2";
+  grid-template-columns: 170px 1fr;
+  grid-template-rows: 2fr 1fr;
+  gap: 30px 32px;
+  width: 98vw;
+  max-width: 900px;
+  margin: 54px 0;
+  align-items: start;
   justify-items: center;
 }
-.menu, .menu2 {
+.menu {
   grid-area: menu;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 52px);
-  gap: 10px 22px;
+  grid-template-rows: repeat(5, 54px);
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 160px;
   justify-items: center;
-  width: 100%;
+  align-items: start;
 }
-.menu2 { grid-area: menu2; display: none; } /* Für mobile */
+@media (max-width: 750px) {
+  .grid {
+    grid-template-areas:
+      "box1"
+      "box2"
+      "menu";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 18px;
+    max-width: 99vw;
+    margin: 22px 0 0 0;
+  }
+  .menu {
+    grid-template-rows: repeat(2, 46px);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    width: 96vw;
+    margin-top: 14px;
+    align-items: center;
+    justify-items: center;
+  }
+}
 .window {
   background: #e0e0e0;
   border: 2px solid #000;
   box-shadow: 4px 4px 0 #555;
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-sizing: border-box;
   width: 100%;
-  max-width: 540px;
-  min-width: 220px;
+  max-width: 490px;
   margin: 0;
-  margin-bottom: 0;
-  margin-top: 0;
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
-  padding: 18px 12px 18px 12px;
-  box-sizing: border-box;
 }
+.box1 { grid-area: box1; min-height: 340px; }
+.box2 { grid-area: box2; max-width: 350px; min-height: 120px;}
 .window-header {
   background: #c0c0c0;
-  padding: 9px 18px;
+  padding: 9px 17px;
   font-weight: bold;
   border-bottom: 2px solid #000;
-  font-size: 1.08em;
   border-radius: 8px 8px 0 0;
+  font-size: 1.09em;
 }
 #screen {
-  min-height: 140px;
-  padding: 19px 10px 20px 10px;
-  font-size: 1.04em;
-  background: inherit;
+  padding: 17px 0px;
+  font-size: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
   border-radius: 0 0 8px 8px;
-  margin: 0;
-  user-select: none;
+  width: 100%;
 }
 #screen img {
   max-width: 100%;
-  max-height: 270px;
+  max-height: 260px;
   object-fit: contain;
-  pointer-events: none;
   user-select: none;
   border-radius: 4px;
 }
 #text-content {
-  min-height: 100px;
-  padding: 11px 7px 14px 7px;
-  font-size: 1.07em;
-  background: inherit;
+  font-size: 1.02em;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  user-select: none;
+  gap: 3px;
+  padding: 11px 3px 12px 3px;
+  min-height: 45px;
   overflow-y: auto;
-  border-radius: 0 0 8px 8px;
-  gap: 5px;
 }
 .iconbutton {
   display: flex;
@@ -114,54 +123,21 @@ body {
 .iconbutton img {
   width: 38px;
   height: 38px;
-  margin-bottom: 1px;
   pointer-events: none;
-  user-select: none;
+  margin-bottom: 1px;
 }
 .iconbutton span {
-  font-size: 0.98em;
-}
-.box1 { grid-area: box1;}
-.box2 { grid-area: box2;}
-@media (max-width: 700px) {
-  .main-grid {
-    grid-template-areas:
-      "box1"
-      "box2"
-      "menu2";
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr auto;
-    gap: 20px;
-    width: 99vw;
-    margin: 12px 0 0 0;
-  }
-  .menu {
-    display: none;
-  }
-  .menu2 {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 46px);
-    gap: 7px 11px;
-    width: 100%;
-    margin-top: 12px;
-    justify-items: center;
-    align-items: center;
-  }
-  .window {
-    max-width: 98vw;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
+  font-size: 0.96em;
 }
 @media (max-width: 430px) {
   .window {
-    font-size: .97em;
+    font-size: .96em;
     padding: 7px;
     border-radius: 8px;
   }
   .window-header {
     padding: 5px 7px;
+    font-size: 1em;
   }
   .iconbutton img {
     width: 28px;
@@ -171,7 +147,7 @@ body {
 </style>
 </head>
 <body>
-<div class="main-grid">
+<div class="grid">
   <nav class="menu">
     <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
     <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photography</span></button>
@@ -187,19 +163,11 @@ body {
     <div class="window-header">~/jonas/v1.0.txt</div>
     <div id="text-content"></div>
   </section>
-  <nav class="menu2">
-    <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
-    <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photography</span></button>
-    <button class="iconbutton" onclick="showNextImage('about')"><img src="icons/pixel.png" alt=""><span>/about</span></button>
-    <button class="iconbutton" onclick="showNextImage('textiles')"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
-    <button class="iconbutton" onclick="showNextImage('etc')"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
-  </nav>
 </div>
 <script>
 let galleryData = {};
 const counters = {};
 let textLog = [];
-
 fetch('gallery.json')
   .then(response => response.json())
   .then(data => { galleryData = data; });
@@ -213,7 +181,6 @@ function showNextImage(folder) {
   const idx = counters[folder] % files.length;
   const item = files[idx];
 
-  // Bild direkt ohne Überblenden wechseln
   while (screen.firstChild) screen.removeChild(screen.firstChild);
   const img = new Image();
   img.src = item.img;
@@ -223,9 +190,7 @@ function showNextImage(folder) {
   // Text-Logik: an den Anfang anhängen, max 5 anzeigen
   textLog.unshift(item.text);
   if (textLog.length > 5) textLog = textLog.slice(0, 5);
-  // Zeige die letzten 5 (neueste oben)
   textContent.innerHTML = textLog.map(t => `<div>${t}</div>`).join('');
-
   counters[folder]++;
 }
 </script>
