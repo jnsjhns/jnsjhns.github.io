@@ -130,8 +130,8 @@ html, body {
   user-select: none;
 }
 .iconbutton img {
-  width: 38px;
-  height: 38px;
+  height: 30px;
+  object-fit: contain;
   pointer-events: none;
   margin-bottom: 2px;
 }
@@ -195,12 +195,12 @@ html, body {
 <body>
 <div class="grid">
   <nav class="menu">
-    <button class="iconbutton" onclick="showNextImage('about')"><img src="icons/pixel.png" alt=""><span>/about</span></button>
-    <button class="iconbutton" onclick="showNextImage('collage')"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
-    <button class="iconbutton" onclick="showNextImage('etc')"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
-    <button class="iconbutton" onclick="showNextImage('itech')"><img src="icons/pixel.png" alt=""><span>/itech</span></button>
-    <button class="iconbutton" onclick="showNextImage('photography')"><img src="icons/pixel.png" alt=""><span>/photo</span></button>
-    <button class="iconbutton" onclick="showNextImage('textiles')"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
+    <button class="iconbutton" onclick="showNextImage('about', this)"><img src="icons/pixel.png" alt=""><span>/about</span></button>
+    <button class="iconbutton" onclick="showNextImage('collage', this)"><img src="icons/pixel.png" alt=""><span>/collage</span></button>
+    <button class="iconbutton" onclick="showNextImage('etc', this)"><img src="icons/pixel.png" alt=""><span>/etc</span></button>
+    <button class="iconbutton" onclick="showNextImage('itech', this)"><img src="icons/pixel.png" alt=""><span>/itech</span></button>
+    <button class="iconbutton" onclick="showNextImage('photography', this)"><img src="icons/pixel.png" alt=""><span>/photo</span></button>
+    <button class="iconbutton" onclick="showNextImage('textiles', this)"><img src="icons/pixel.png" alt=""><span>/textiles</span></button>
   </nav>
 
   <div class="boxes">
@@ -224,28 +224,39 @@ fetch('gallery.json')
   .then(response => response.json())
   .then(data => { galleryData = data; });
 
-function showNextImage(folder) {
+function showNextImage(folder, buttonElement) {
   const screen = document.getElementById('screen');
   const textContent = document.getElementById('text-content');
   if (!galleryData[folder]) return;
   if (!counters[folder]) counters[folder] = 0;
 
+  // --- Button-Icon ändern ---
+  const iconImg = buttonElement.querySelector('img');
+  const originalSrc = iconImg.src;
+  iconImg.src = "icons/pixel_click.png";
+
+  // Nach 0.5 Sekunde zurücksetzen
+  setTimeout(() => {
+    iconImg.src = originalSrc;
+  }, 500);
+
+  // --- Bild im großen Fenster ändern ---
   const files = galleryData[folder];
   const idx = counters[folder] % files.length;
   const item = files[idx];
 
-  // Bild aktualisieren
   screen.innerHTML = "";
   const img = new Image();
   img.src = item.img;
   img.alt = folder + " " + (idx + 1);
   screen.appendChild(img);
 
-  // Nur aktueller Text anzeigen
   textContent.textContent = item.text;
 
   counters[folder]++;
 }
 </script>
+
+
 </body>
 </html>
