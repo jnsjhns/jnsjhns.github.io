@@ -1,25 +1,34 @@
 {
   "about": [
-    { "img": "about/1.jpg", "text": "About Text zum ersten Bild." },
-    { "img": "about/2.jpg", "text": "About Text zum zweiten Bild." },
-    { "img": "about/3.jpg", "text": "About Text zum dritten Bild." }
+    { "img": "about/1.jpg", "text": "about two bunnies" },
+    { "img": "about/2.jpg", "text": "..." },
+    { "img": "about/3.jpg", "text": "jonas & snow" },
+    { "img": "about/4.jpg", "text": "mountain & autumn" }
   ],
   "collage": [
-    { "img": "collage/1.jpg", "text": "Collage Erster Dummy-Text." },
-    { "img": "collage/2.jpg", "text": "Collage Zweiter Dummy-Text." },
-    { "img": "collage/3.jpg", "text": "Collage Dritter Dummy-Text." }
+    { "img": "collage/1.jpg", "text": "good things take time" },
+    { "img": "collage/2.jpg", "text": "vor_statt godzilla" },
+    { "img": "collage/3.jpg", "text": "vor_statt emotions" },
+    { "img": "collage/4.jpg", "text": "perfect." },
+    { "img": "collage/5.jpg", "text": "Leichtigkeit?" },
+    { "img": "collage/6.jpg", "text": "bussi" }
   ],
   "etc": [
-    { "img": "etc/1.jpg", "text": "Etc Zum ersten Bild." },
-    { "img": "etc/2.jpg", "text": "Etc Zum zweiten Bild." }
+    { "img": "etc/1.jpg", "text": "bird" },
+    { "img": "etc/2.jpg", "text": "rax" }
   ],
   "photography": [
-    { "img": "photography/1.jpg", "text": "Photography Erster Dummy-Text." },
-    { "img": "photography/2.jpg", "text": "Photography Zweiter Dummy-Text." }
+    { "img": "photography/1.jpg", "text": "sky" },
+    { "img": "photography/2.jpg", "text": "friends" }
   ],
   "textiles": [
-    { "img": "textiles/1.jpg", "text": "Textiles Dummy-Text zum ersten Bild." },
-    { "img": "textiles/2.jpg", "text": "Textiles Dummy-Text zum zweiten Bild." },
-    { "img": "textiles/3.jpg", "text": "Textiles Dummy-Text zum dritten Bild." }
+    { "img": "textiles/1.jpg", "text": "gatter |╪|╪|╪ kamm" },
+    { "img": "textiles/2.jpg", "text": "buchbindewerkstatt uni-ak ♡" },
+    { "img": "textiles/3.jpg", "text": "gurtbänder" }
+  ],
+  "itech": [
+    { "img": "itech/1.jpg", "text": "◊" },
+    { "img": "itech/2.jpg", "text": " ... " },
+    { "img": "itech/3.jpg", "text": " . . . . " }
   ]
 }
