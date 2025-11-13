@@ -21,7 +21,10 @@
   ],
   "photography": [
     { "img": "photography/1.jpg", "text": "sky" },
-    { "img": "photography/2.jpg", "text": "friends" }
+    { "img": "photography/2.jpg", "text": "friends" },
+    { "img": "photography/3.jpg", "text": "24h" },
+    { "img": "photography/4.jpg", "text": "line of beauty" },
+    { "img": "photography/5.jpg", "text": "Einbahn" }
   ],
   "textiles": [
     { "img": "textiles/1.jpg", "text": "gatter |╪|╪|╪ kamm" },
