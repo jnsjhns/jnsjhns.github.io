@@ -21,7 +21,7 @@
     { "img": "etc/2.jpg", "text": "rax" }
   ],
   "photography": [
-    { "img": "photography/1.jpg", "text": "sky" },
+    { "img": "photography/1.jpg", "text": "sky " },
     { "img": "photography/2.jpg", "text": "friends" },
     { "img": "photography/3.jpg", "text": "24h" },
     { "img": "photography/4.jpg", "text": "line of beauty" },
@@ -30,7 +30,7 @@
   "textiles": [
     { "img": "textiles/1.jpg", "text": "gatter |╪|╪|╪ kamm" },
     { "img": "textiles/2.jpg", "text": "buchbindewerkstatt uni-ak ♡" },
-    { "img": "textiles/3.jpg", "text": "gurtbänder" }
+    { "img": "textiles/3.jpg", "text": "weaving" }
   ],
   "itech": [
     { "img": "itech/1.jpg", "text": "◊" },
